@@ -1,4 +1,5 @@
 from PIL import Image
+from fractions import Fraction
 import pickle, sys
 
 class pathCreator:
@@ -131,6 +132,10 @@ class loadedPath:
 			self.pc.drawNext(outImgPix,invColor,cp,np)
 		outImg.save("images/output/"+self.fName+"-out.png")
 	def showPath(self, startIndex=0, numOutput=5):
+		aspRatio = Fraction(self.pc.im.size[0],self.pc.im.size[1]).limit_denominator(100)
+		nailsX = len([x for x in self.pc.edges if x[1] == 0])
+		nailsY = len([x for x in self.pc.edges if x[0] == 0])
+		print("Aspect Ratio: %d:%d\nNumber of nails on top side(total): %d\nNumber of nails on left side(total): %d\n" % (aspRatio.numerator, aspRatio.denominator,nailsX,nailsY))
 		for i in range(startIndex,len(self.path)):
 			cp = self.path[i][0]
 			np = self.path[i][1]
@@ -140,14 +145,14 @@ class loadedPath:
 
 
 if __name__ == '__main__':
-	name = "leaf"
-	num = 5
-	load = False
+	name = "shark"
+	num = 1
+	load = True
 
-	numNails = 100
-	maxLines = 500
-	thickness = 40
-	skipNeighbors = 0
+	numNails = 300
+	maxLines = 2000
+	thickness = 30
+	skipNeighbors = 20
 
 	bgColor = (255,255,255)
 	stringColor = (0,0,0)
