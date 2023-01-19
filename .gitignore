@@ -1,3 +1,5 @@
 images/output/*
 images/source/*
 saves/*
+__pycache__/*
+results.txt
